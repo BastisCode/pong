@@ -3,38 +3,33 @@ package de.game.pong.model;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import processing.core.PApplet;
-
 public class BallModel {
 
 	private static final Logger LOGGER = LogManager.getLogger();
 
-	private PApplet applet;
+	private int displayWidth;
+	private int displayHeight;
 	private int posX;
 	private int posY;
 	private int dirX;
 	private int dirY;
 	private int radius;
 
-	BallModel(PApplet applet, int initialPosX, int initialPosY, int initialDirX, int initialDirY, int radius) {
-		this.applet = applet;
-		this.posX = initialPosX;
-		this.posY = initialPosY;
+	BallModel(int initialDirX, int initialDirY) {
 		this.dirX = initialDirX;
 		this.dirY = initialDirY;
-		this.radius = radius;
 	}
 
-	public BallModel(PApplet applet, int initialPosX, int initialPosY) {
-		this(applet, initialPosX, initialPosY, 5, 0, applet.displayWidth / 100);
+	public BallModel() {
+		this(5, -2);
 	}
 
 	public void calcBall() {
-		if (posX < radius || posX > applet.displayWidth - radius) {
+		if (posX < radius || posX > displayWidth - radius) {
 			this.dirX = this.dirX * -1;
 			LOGGER.debug("ball hits wall");
 		}
-		if (posY > applet.displayHeight - radius) {
+		if (posY < radius) {
 			this.dirY = this.dirY * -1;
 			LOGGER.debug("ball hits top");
 		}
@@ -58,6 +53,14 @@ public class BallModel {
 		this.dirY = dirY;
 	}
 
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+
 	public int getPosX() {
 		return posX;
 	}
@@ -68,5 +71,25 @@ public class BallModel {
 
 	public int getRadius() {
 		return radius;
+	}
+
+	public void setDisplayWidth(int displayWidth) {
+		this.displayWidth = displayWidth;
+	}
+
+	public void setDisplayHeight(int displayHeight) {
+		this.displayHeight = displayHeight;
+	}
+
+	public void setRadius(int radius) {
+		this.radius = radius;
+	}
+
+	public void changeDirX() {
+		this.dirX *= -1;
+	}
+
+	public void changeDirY() {
+		this.dirY *= -1;
 	}
 }

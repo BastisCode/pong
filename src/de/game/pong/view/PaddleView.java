@@ -3,17 +3,20 @@ package de.game.pong.view;
 import de.game.pong.model.PaddleModel;
 import processing.core.PApplet;
 
-public class PaddleView extends AbstractView{
+public class PaddleView extends AbstractView {
 
-	public PaddleView(PApplet display, PaddleModel paddleModel, int posX, int posY) {
+	private PaddleModel paddleModel;
+
+	public PaddleView(PApplet display, PaddleModel paddleModel) {
 		super(display);
-		// TODO Auto-generated constructor stub
+		this.paddleModel = paddleModel;
 	}
 
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
-		
+		display.rect(paddleModel.getPosX() - paddleModel.getPaddleWidth() / 2,
+				paddleModel.getPosY() - paddleModel.getPaddleHeight() / 2, paddleModel.getPaddleWidth(),
+				paddleModel.getPaddleHeight());
 	}
 
 }

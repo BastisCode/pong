@@ -12,7 +12,19 @@ public class BallController implements Controller {
 
 	@Override
 	public void handleEvent() {
+	}
+
+	@Override
+	public void update() {
 		this.ballModel.calcBall();
+	}
+
+	public void changeDirX() {
+		this.ballModel.changeDirX();
+	}
+
+	public void changeDirY() {
+		this.ballModel.changeDirY();
 	}
 
 }

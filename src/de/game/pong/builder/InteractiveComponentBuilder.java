@@ -1,8 +1,5 @@
 package de.game.pong.builder;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import processing.core.PApplet;
 
 public class InteractiveComponentBuilder {
@@ -16,8 +13,9 @@ public class InteractiveComponentBuilder {
 		if (type.equals(COUNTER)) {
 			builder = new CounterComponentBuilder(posX, posY);
 		} else if (type.equals(BALL)) {
-			builder = new BallComponentBuilder(posX, posY, applet);
+			builder = new BallComponentBuilder(posX, posY);
 		} else if (type.equals(PADDLE)) {
+			builder = new PaddleComponentBuilder(posX, posY);
 		}
 		return buildComponent(builder, applet);
 	}

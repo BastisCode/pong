@@ -12,7 +12,13 @@ public class CounterComponent extends InteractiveComponent {
 	CounterController counterController;
 
 	@Override
-	public void update() {
+	public void updateAndDraw() {
+		this.counterController.update();
+		this.draw();
+	}
+
+	@Override
+	public void handleEvent() {
 		this.counterController.handleEvent();
 	}
 

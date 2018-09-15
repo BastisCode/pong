@@ -7,12 +7,10 @@ public class BallComponentBuilder implements Builder {
 	private BallComponent ballComponent;
 	private int posX;
 	private int posY;
-	private PApplet applet;
 
-	public BallComponentBuilder(int posX, int posY, PApplet applet) {
+	public BallComponentBuilder(int posX, int posY) {
 		this.posX = posX;
 		this.posY = posY;
-		this.applet = applet;
 	}
 
 	@Override
@@ -22,12 +20,12 @@ public class BallComponentBuilder implements Builder {
 
 	@Override
 	public void buildModel() {
-		this.ballComponent.buildModel(this.applet, posX, posY);
+		this.ballComponent.buildModel();
 	}
 
 	@Override
 	public void buildView(PApplet applet) {
-		this.ballComponent.buildView(applet);
+		this.ballComponent.buildView(applet, posX, posY);
 	}
 
 	@Override

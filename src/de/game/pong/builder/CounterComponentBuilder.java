@@ -1,13 +1,8 @@
 package de.game.pong.builder;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import processing.core.PApplet;
 
 public class CounterComponentBuilder implements Builder {
-
-	private static final Logger LOGGER = LogManager.getLogger();
 
 	private CounterComponent counterComponent;
 	private int posX;

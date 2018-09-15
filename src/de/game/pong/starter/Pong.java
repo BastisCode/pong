@@ -1,20 +1,21 @@
 package de.game.pong.starter;
 
-import de.game.pong.builder.CounterComponentBuilder;
 import de.game.pong.builder.BallComponent;
 import de.game.pong.builder.CounterComponent;
 import de.game.pong.builder.InteractiveComponentBuilder;
+import de.game.pong.builder.PaddleComponent;
+import de.game.pong.helper.Helper;
 import processing.core.PApplet;
 
 public class Pong extends PApplet {
 
-	private int ballRadius;
 	private int paddleWidth;
-	private int paddleHeight;
 	private int paddleDistFromBottom;
 
 	private CounterComponent scoreCounter;
 	private BallComponent ball;
+	private PaddleComponent paddle;
+	private PaddleComponent paddle2;
 
 	@Override
 	public void settings() {
@@ -29,8 +30,6 @@ public class Pong extends PApplet {
 		frameRate(60);
 
 		// Set initial values for the game elements
-		paddleHeight = displayHeight / 20;
-		paddleWidth = displayWidth / 10;
 		paddleDistFromBottom = displayHeight / 20;
 
 		// build all necessary components
@@ -39,19 +38,42 @@ public class Pong extends PApplet {
 				InteractiveComponentBuilder.COUNTER, displayWidth - 200, 40);
 		this.ball = (BallComponent) InteractiveComponentBuilder.create(this, InteractiveComponentBuilder.BALL,
 				displayWidth / 2, displayHeight / 2);
+		this.paddle = (PaddleComponent) InteractiveComponentBuilder.create(this, InteractiveComponentBuilder.PADDLE,
+				displayWidth / 2 - paddleWidth, displayHeight - paddleDistFromBottom);
+		this.paddle2 = (PaddleComponent) InteractiveComponentBuilder.create(this, InteractiveComponentBuilder.PADDLE,
+				displayWidth / 2 - paddleWidth, paddleDistFromBottom);
 	}
 
 	@Override
 	public void draw() { // draw() loops forever, until stopped
-		background(70);
-		this.ball.update();
-		this.ball.draw();
-		this.scoreCounter.draw();
+		background(40);
+		if (Helper.checkCollision(this.ball, this.paddle) > 0) {
+			this.ball.changeDirection(Helper.checkCollision(this.ball, this.paddle));
+			this.scoreCounter.handleEvent();
+		}
+		if (Helper.checkCollision(this.ball, this.paddle2) > 0) {
+			this.ball.changeDirection(Helper.checkCollision(this.ball, this.paddle2));
+			this.scoreCounter.handleEvent();
+		}
+		this.ball.updateAndDraw();
+		this.scoreCounter.updateAndDraw();
+		this.paddle.updateAndDraw();
+		this.paddle2.updateAndDraw();
 	}
 
 	@Override
 	public void mouseClicked() {
-		this.scoreCounter.update();
 	}
 
+	@Override
+	public void keyPressed() {
+		if (keyCode == 37) {
+			this.paddle.moveLeft();
+			this.paddle2.moveLeft();
+		}
+		if (keyCode == 39) {
+			this.paddle.moveRight();
+			this.paddle2.moveRight();
+		}
+	}
 }
