@@ -7,6 +7,7 @@ public class InteractiveComponentBuilder {
 	public static final String COUNTER = "counter";
 	public static final String BALL = "ball";
 	public static final String PADDLE = "paddle";
+	public static final String BRICK = "brick";
 
 	public static InteractiveComponent create(PApplet applet, String type, int posX, int posY) {
 		Builder builder = null;
@@ -16,6 +17,8 @@ public class InteractiveComponentBuilder {
 			builder = new BallComponentBuilder(posX, posY);
 		} else if (type.equals(PADDLE)) {
 			builder = new PaddleComponentBuilder(posX, posY);
+		} else if (type.equals(BRICK)) {
+			builder = new BrickComponentBuilder(posX, posY);
 		}
 		return buildComponent(builder, applet);
 	}

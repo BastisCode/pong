@@ -1,6 +1,11 @@
 package de.game.pong.starter;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Iterator;
+
 import de.game.pong.builder.BallComponent;
+import de.game.pong.builder.BrickComponent;
 import de.game.pong.builder.CounterComponent;
 import de.game.pong.builder.InteractiveComponentBuilder;
 import de.game.pong.builder.PaddleComponent;
@@ -15,7 +20,8 @@ public class Pong extends PApplet {
 	private CounterComponent scoreCounter;
 	private BallComponent ball;
 	private PaddleComponent paddle;
-	private PaddleComponent paddle2;
+	private ArrayList<BrickComponent> bricks;
+	private List<BrickComponent> bricksToRemove;
 
 	@Override
 	public void settings() {
@@ -33,15 +39,18 @@ public class Pong extends PApplet {
 		paddleDistFromBottom = displayHeight / 20;
 
 		// build all necessary components
-		// counter for counting the score
 		this.scoreCounter = (CounterComponent) InteractiveComponentBuilder.create(this,
 				InteractiveComponentBuilder.COUNTER, displayWidth - 200, 40);
 		this.ball = (BallComponent) InteractiveComponentBuilder.create(this, InteractiveComponentBuilder.BALL,
 				displayWidth / 2, displayHeight / 2);
 		this.paddle = (PaddleComponent) InteractiveComponentBuilder.create(this, InteractiveComponentBuilder.PADDLE,
 				displayWidth / 2 - paddleWidth, displayHeight - paddleDistFromBottom);
-		this.paddle2 = (PaddleComponent) InteractiveComponentBuilder.create(this, InteractiveComponentBuilder.PADDLE,
-				displayWidth / 2 - paddleWidth, paddleDistFromBottom);
+		this.bricks = new ArrayList<>(10);
+		for (int i = 0; i < 10; i++) {
+			this.bricks.add((BrickComponent) InteractiveComponentBuilder.create(this, InteractiveComponentBuilder.BRICK,
+					displayWidth / 10 * i + displayWidth / 10 / 2, displayHeight / 10));
+		}
+		this.bricksToRemove = new ArrayList<>();
 	}
 
 	@Override
@@ -51,14 +60,21 @@ public class Pong extends PApplet {
 			this.ball.changeDirection(Helper.checkCollision(this.ball, this.paddle));
 			this.scoreCounter.handleEvent();
 		}
-		if (Helper.checkCollision(this.ball, this.paddle2) > 0) {
-			this.ball.changeDirection(Helper.checkCollision(this.ball, this.paddle2));
-			this.scoreCounter.handleEvent();
-		}
 		this.ball.updateAndDraw();
 		this.scoreCounter.updateAndDraw();
+		this.bricksToRemove.clear();
+		for (BrickComponent brick : this.bricks) {
+			if (Helper.checkCollision(this.ball, brick) > 0) {
+				this.ball.changeDirection(Helper.checkCollision(this.ball, brick));
+				this.scoreCounter.handleEvent();
+				this.bricksToRemove.add(brick);
+			}
+		}
+		this.bricks.removeAll(this.bricksToRemove);
+		for (BrickComponent brick : this.bricks) {
+			brick.updateAndDraw();
+		}
 		this.paddle.updateAndDraw();
-		this.paddle2.updateAndDraw();
 	}
 
 	@Override
@@ -69,11 +85,9 @@ public class Pong extends PApplet {
 	public void keyPressed() {
 		if (keyCode == 37) {
 			this.paddle.moveLeft();
-			this.paddle2.moveLeft();
 		}
 		if (keyCode == 39) {
 			this.paddle.moveRight();
-			this.paddle2.moveRight();
 		}
 	}
 }

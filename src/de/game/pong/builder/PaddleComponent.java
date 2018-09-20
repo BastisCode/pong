@@ -39,8 +39,8 @@ public class PaddleComponent extends InteractiveComponent implements Horizontall
 		paddleModel.setDisplayHeight(applet.displayHeight);
 		paddleModel.setPosX(posX);
 		paddleModel.setPosY(posY);
-		paddleModel.setPaddleHeight(applet.displayHeight / 20);
 		paddleModel.setPaddleWidth(applet.displayWidth / 5);
+		paddleModel.setPaddleHeight(applet.displayHeight / 20);
 	}
 
 	protected void buildController() {
