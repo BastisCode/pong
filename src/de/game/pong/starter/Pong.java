@@ -32,7 +32,7 @@ public class Pong extends PApplet {
 	public void setup() { // setup() runs once
 		background(0);
 		noStroke();
-		frameRate(60);
+		frameRate(30);
 
 		// Set initial values for the game elements
 		paddleDistFromBottom = displayHeight / 20;
@@ -59,7 +59,6 @@ public class Pong extends PApplet {
 			this.ball.changeDirection(Helper.checkCollision(this.ball, this.paddle));
 			this.scoreCounter.handleEvent();
 		}
-		this.ball.updateAndDraw();
 		this.scoreCounter.updateAndDraw();
 		this.bricksToRemove.clear();
 		for (BrickComponent brick : this.bricks) {
@@ -74,6 +73,7 @@ public class Pong extends PApplet {
 			brick.updateAndDraw();
 		}
 		this.paddle.updateAndDraw();
+		this.ball.updateAndDraw();
 	}
 
 	@Override

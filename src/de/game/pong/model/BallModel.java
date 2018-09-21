@@ -20,7 +20,7 @@ public class BallModel {
 	}
 
 	public BallModel() {
-		this(5, -2);
+		this(10, -10);
 	}
 
 	public void calcBall() {
