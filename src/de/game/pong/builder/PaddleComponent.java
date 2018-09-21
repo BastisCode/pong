@@ -36,7 +36,6 @@ public class PaddleComponent extends InteractiveComponent implements Horizontall
 		views = new AbstractView[1];
 		this.views[0] = new PaddleView(applet, paddleModel);
 		paddleModel.setDisplayWidth(applet.displayWidth);
-		paddleModel.setDisplayHeight(applet.displayHeight);
 		paddleModel.setPosX(posX);
 		paddleModel.setPosY(posY);
 		paddleModel.setPaddleWidth(applet.displayWidth / 5);

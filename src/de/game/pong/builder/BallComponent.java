@@ -43,7 +43,6 @@ public class BallComponent extends InteractiveComponent implements Collideable {
 		views = new AbstractView[1];
 		this.views[0] = new BallView(applet, ballModel);
 		ballModel.setDisplayWidth(applet.displayWidth);
-		ballModel.setDisplayHeight(applet.displayHeight);
 		ballModel.setRadius(applet.displayWidth / 100);
 		ballModel.setPosX(posX);
 		ballModel.setPosY(posY);

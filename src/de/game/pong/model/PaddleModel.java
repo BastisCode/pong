@@ -8,7 +8,6 @@ public class PaddleModel {
 	private int paddleWidth;
 	private int paddleHeight;
 	private int displayWidth;
-	private int displayHeight;
 
 	public void setPaddleWidth(int paddleWidth) {
 		this.paddleWidth = paddleWidth;
@@ -20,10 +19,6 @@ public class PaddleModel {
 
 	public void setDisplayWidth(int displayWidth) {
 		this.displayWidth = displayWidth;
-	}
-
-	public void setDisplayHeight(int displayHeight) {
-		this.displayHeight = displayHeight;
 	}
 
 	public PaddleModel(int initialChangeX) {

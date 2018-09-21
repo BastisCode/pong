@@ -2,7 +2,6 @@ package de.game.pong.starter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Iterator;
 
 import de.game.pong.builder.BallComponent;
 import de.game.pong.builder.BrickComponent;

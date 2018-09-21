@@ -8,7 +8,6 @@ public class BallModel {
 	private static final Logger LOGGER = LogManager.getLogger();
 
 	private int displayWidth;
-	private int displayHeight;
 	private int posX;
 	private int posY;
 	private int dirX;
@@ -75,10 +74,6 @@ public class BallModel {
 
 	public void setDisplayWidth(int displayWidth) {
 		this.displayWidth = displayWidth;
-	}
-
-	public void setDisplayHeight(int displayHeight) {
-		this.displayHeight = displayHeight;
 	}
 
 	public void setRadius(int radius) {
